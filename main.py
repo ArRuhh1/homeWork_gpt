@@ -16,9 +16,12 @@ user_input = st.text_area("Начальный текст:", "Пример: Ис�
 max_length = st.slider("Максимальная длина текста", 50, 500, 150)
 temperature = st.slider("Температура (креативность)", 0.5, 1.5, 1.0)
 
+def generate_text(prompt, max_length=150, temperature=1.0):
+    return text_generator(prompt, max_length=max_length, temperature=temperature)[0]['generated_text']
+
 if st.button("Сгенерировать текст"):
     with st.spinner("Генерация..."):
-        output = text_generator(user_input, max_length=max_length, temperature=temperature)
+        output = generate_text(user_input, max_length=max_length, temperature=temperature)
         st.subheader("Сгенерированный текст:")
         st.write(output[0]['generated_text'])
 
